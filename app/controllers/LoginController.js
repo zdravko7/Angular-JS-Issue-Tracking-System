@@ -5,6 +5,9 @@
 app.controller('LoginController',
     function ($scope, $rootScope, $location, authService, notifyService) {
         $scope.login = function(userData) {
+            userData.grant_type = password;
+            console.log(userData);
+
             authService.login(userData,
                 function success() {
                     notifyService.showInfo("Login successful");

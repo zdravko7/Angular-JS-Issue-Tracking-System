@@ -5,12 +5,12 @@ app.factory('userService',
     function($http, baseServiceUrl, authService)
     {
         return {
-            createNewAd: function(adData, success, error) {
+            createNewProject: function(projectData, success, error) {
                 var request = {
                     method: 'POST',
-                    url: baseServiceUrl + 'api/user/ads',
+                    url: baseServiceUrl + 'Projects/',
                     headers: authService.getAuthHeaders(),
-                    data: adData
+                    data: projectData
                 };
 
                 $http(request).success(success).error(error);

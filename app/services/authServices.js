@@ -8,7 +8,7 @@ app.factory('authService',
             login: function(userData, success, error) {
                 var request = {
                     method: 'POST',
-                    url: baseServiceUrl + '/api/Token',
+                    url: baseServiceUrl + 'api/Token',
                     data: userData
                 };
 
@@ -16,12 +16,12 @@ app.factory('authService',
                     sessionStorage['currentUser'] = JSON.stringify(data);
                     success(data);
                 }).error(error);
-            }
+            },
 
-            /*register: function(userData, success, error) {
+            register: function(userData, success, error) {
                 var request = {
                     method: 'POST',
-                    url: baseServiceUrl + 'api/user/register',
+                    url: baseServiceUrl + 'api/Account/Register',
                     data: userData
                 };
 
@@ -29,8 +29,8 @@ app.factory('authService',
                     sessionStorage['currentUser'] = JSON.stringify(data);
                     success(data);
                 }).error(error);
-            },
-
+            }
+/*
             logout: function() {
                 delete sessionStorage['currentUser'];
             },
