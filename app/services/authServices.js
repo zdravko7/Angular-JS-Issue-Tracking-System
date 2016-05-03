@@ -9,7 +9,8 @@ app.factory('authService',
                 var request = {
                     method: 'POST',
                     url: baseServiceUrl + 'api/Token',
-                    data: userData
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    data: "grant_type=password&username=" + userData.username + "&password=" + userData.password
                 };
 
                 $http(request).success(function(data) {
@@ -29,11 +30,28 @@ app.factory('authService',
                     sessionStorage['currentUser'] = JSON.stringify(data);
                     success(data);
                 }).error(error);
-            }
-/*
+            },
+
             logout: function() {
                 delete sessionStorage['currentUser'];
             },
+
+            editUser: function (userData) {
+
+                var request = {
+                    method: 'POST',
+                    url: baseServiceUrl + 'api/Account/ChangePassword',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    data: userData
+                };
+
+                $http(request).success(function (data) {
+                    sessionStorage['currentUser'] = JSON.stringify(data);
+                    success(data);
+                }).error(error);
+            }
+
+            /*
 
             getCurrentUser: function() {
                 var userObject = sessionStorage['currentUser'];

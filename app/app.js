@@ -28,4 +28,4 @@ app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
 
-app.constant('baseServiceUrl', 'http://softuni-issue-tracker.azurewebsites.net');
+app.constant('baseServiceUrl', 'http://softuni-issue-tracker.azurewebsites.net/');

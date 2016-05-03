@@ -3,21 +3,29 @@
  */
 
 app.controller('LoginController',
-    function ($scope, $rootScope, $location, authService, notifyService) {
+    function ($scope, $rootScope, $location, authService, notifyService, baseServiceUrl) {
         $scope.login = function(userData) {
-            userData.grant_type = password;
-            console.log(userData);
-
             authService.login(userData,
                 function success() {
                     notifyService.showInfo("Login successful");
                     $location.path("/");
                 },
                 function error(err) {
-                    notifyService.showError("Login failed", err);
+                    notifyService.showError("Login failed", error.data.error_description);
                 }
             );
         };
+
+        $scope.logout = function () {
+            authService.logout()
+                .then(
+                    function success() {
+                        notifyService.showInfo("Logout successful")
+                    },
+                    function error(err) {
+                        notifyService.showError("could not logout", err)
+                    })
+        }
     }
 );
 
