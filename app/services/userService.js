@@ -5,6 +5,18 @@ app.factory('userService',
     function($http, baseServiceUrl, authService)
     {
         return {
+
+            isAuthenticated: function isAuthenticated(){
+                console.log(localStorage["userAuth"]);
+                return localStorage["userAuth"];
+
+            },
+            isAdmin: function isAdmin(){
+                return  sessionStorage["isAdmin"];
+            }
+
+        };
+            /*
             createNewProject: function(projectData, success, error) {
                 var request = {
                     method: 'POST',
@@ -35,5 +47,5 @@ app.factory('userService',
                 //TODO
             }
 
-        }
+        }*/
     });

@@ -20,7 +20,7 @@ app.controller('LoginController',
             authService.logout()
                 .then(
                     function success() {
-                        notifyService.showInfo("Logout successful")
+                        notifyService.showInfo("Logout successful");
                     },
                     function error(err) {
                         notifyService.showError("could not logout", err)
