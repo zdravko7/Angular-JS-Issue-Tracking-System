@@ -11,7 +11,7 @@ app.controller('LoginController',
                     $location.path("/");
                 },
                 function error(err) {
-                    notifyService.showError("Login failed", error.data.error_description);
+                    notifyService.showError("Login failed", error);
                 }
             );
         };
