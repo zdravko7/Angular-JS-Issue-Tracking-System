@@ -1,0 +1,110 @@
+<header>
+    <h1>{{issue.Title}}</h1>
+</header>
+
+<div class="issue-info comments col-md-5 col-md-offset-1">
+    <h3>Description:</h3>
+    <li>{{issue.Description}}</li>
+    <h3>Assignee:</h3>
+    <li>{{issue.Assignee.Username}}</li>
+    <h3>Author:</h3>
+    <li>{{issue.Author.Username}}</li>
+
+    <h3>Statuses:</h3>
+    <ul ng-if="isAssignee()" id="status-ul">
+        <li>
+            <button class="btn btn-primary status-btn" disabled>
+                {{issue.Status.Name}}
+            </button>
+        </li>
+        <li ng-repeat="status in issue.AvailableStatuses">
+            <button class="btn btn-primary status-btn" ng-click="updateStatus(status.Id)">
+                {{status.Name}}
+            </button>
+        </li>
+    </ul>
+
+    <div ng-controller="IssueController" class="container">
+        <div class="wrapper" ng-if="true">
+            <button ng-if="isLeader()||isAssignee()" ng-click="toggleModal()" class="btn btn-danger">Edit Issue</button>
+
+            <div toggle-window title="Edit issue" visible="showModal">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input required type="text" ng-model="issue.Title" class="form-control" id="title" placeholder="Enter title" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" ng-model="issue.Description" class="form-control" id="description" placeholder="Enter description" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="due-date">Due Date</label>
+                        <input type="date" ng-model="issue.dueDate" class="form-control" id="due-date" placeholder="Enter DueDate" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectId">Project Id</label>
+                        <input disabled type="text" ng-model="issue.projectId" id="projectId"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="due-date">Assignee</label>
+                        <select ng-model="issue.assigneeId">
+                            <option ng-repeat="user in users" value="{{user.Id}}">{{user.Username}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priority">Priority</label>
+                        <select id="priority" ng-model="issue.priorityId ">
+                            <option ng-repeat="priority in priorities" value="{{priority.Id}}">{{priority.Name}}</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" ng-click="editIssue(issue)" class="btn btn-default" class="close" data-dismiss="modal">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="comments col-md-6">
+    <div class="comment-holder" ng-repeat="comment in comments">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                </div><!-- /thumbnail -->
+            </div><!-- /col-sm-1 -->
+
+            <div class="col-md-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>{{comment.Author.Username}}</strong> <span class="text-muted">commented 5 days ago</span>
+                    </div>
+                    <div class="panel-body">
+                        {{comment.Text}}
+                    </div><!-- /panel-body -->
+                </div><!-- /panel panel-default -->
+            </div><!-- /col-sm-5 -->
+        </div><!-- /container -->
+    </div>
+
+    <div class="add-comment">
+        <div>
+            <div class="col-md-10 col-md-offset-2">
+                <div class="widget-area no-padding blank">
+                    <div class="status-upload">
+                        <form>
+                            <textarea ng-model="comment.text" placeholder="Say something about this issue." ></textarea>
+                            <button type="submit" ng-click="addComment(comment)" class="btn btn-success green"><i class="fa fa-share"></i>Add Comment</button>
+                        </form>
+                    </div><!-- Status Upload  -->
+                </div><!-- Widget Area -->
+            </div>
+
+        </div>
+    </div>
+</div>
