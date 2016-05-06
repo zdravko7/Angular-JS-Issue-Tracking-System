@@ -3,13 +3,11 @@
 <div ng-if="!identityService.isLogged()">
     <div class="formField col-md-4 col-md-offset-1">
         <h1 class="formHeading">Login</h1>
-        <img ng-src="{{separatorImage}}" class="formImage">
 
         <label class="formLabel" for="loginEmail">Email:</label>
 
         <div class="input-group">
             <div class="input-group-addon">
-                <span class="glyphicon glyphicon-envelope"></span>
             </div>
             <input class="formTextInput" type="text" id="loginEmail" ng-model="loginUserData.Email" required/>
         </div>
@@ -23,7 +21,6 @@
 
             <input class="formTextInput" type="password" id="loginPassword" ng-model="loginUserData.Password" required/>
         </div>
-        <img ng-src="{{separatorImage}}" class="formImage">
 
         <p>
             <a ng-click="login(loginUserData)" class="formButton btn btn-primary">Login</a>
@@ -32,13 +29,11 @@
     </div>
     <div class="formField col-md-4 col-md-offset-1">
         <h1 class="formHeading">Register</h1>
-        <img ng-src="{{separatorImage}}" class="formImage">
 
         <label class="formLabel" for="email">Email:</label>
 
         <div class="input-group">
             <div class="input-group-addon">
-                <span class="glyphicon glyphicon-envelope"></span>
             </div>
             <input class="formTextInput" type="email" id="email" ng-model="registerUserData.Email" required/>
         </div>
@@ -63,7 +58,6 @@
                    ng-model="registerUserData.ConfirmPassword"
                    required/>
         </div>
-        <img ng-src="{{separatorImage}}" class="formImage">
 
         <p>
             <a ng-click="register(registerUserData)" class="formButton btn btn-primary">Register</a>
@@ -71,7 +65,7 @@
     </div>
 </div>
 <div ng-if="identityService.isLogged()" class="dashboard">
-    <section class="col-md-4 col-md-offset-1">
+    <section class="gray col-md-4 col-md-offset-1">
         <h2 class="title">My Projects:</h2>
         <table class="table table-condensed" ng-if="!projectsLoading" ng-if="myProjects.Projects.length > 0">
             </thead>
@@ -91,14 +85,14 @@
         </uib-pagination>
     </section>
     <section class="gray col-md-6 col-md-offset-1">
-        <h2 class="whiteText title">My Issues:</h2>
+        <h2 class="title">My Issues:</h2>
         <table class="table table-condensed table-striped" ng-if="!issuesLoading" ng-if="myIssues.Issues.length > 0">
             <thead>
             <tr>
-                <th class="whiteBorder whiteText increased col-md-3">Title</th>
-                <th class="whiteBorder whiteText increased col-md-3">Description</th>
-                <th class="whiteBorder whiteText increased col-md-3">Project</th>
-                <th class="whiteBorder whiteText increased col-md-3">Due Date</th>
+                <th class="whiteBorder increased col-md-3">Title</th>
+                <th class="whiteBorder increased col-md-3">Description</th>
+                <th class="whiteBorder increased col-md-3">Project</th>
+                <th class="whiteBorder increased col-md-3">Due Date</th>
             </tr>
             </thead>
             <tbody>
