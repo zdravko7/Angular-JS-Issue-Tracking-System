@@ -65,13 +65,12 @@
     </div>
 </div>
 <div ng-if="identityService.isLogged()" class="dashboard">
-    <section class="gray col-md-4 col-md-offset-1">
-        <h2 class="title">My Projects:</h2>
+    <section class="col-md-4 col-md-offset-1">
+        <h2 class="title color-navyBlue">My Projects:</h2>
         <table class="table table-condensed" ng-if="!projectsLoading" ng-if="myProjects.Projects.length > 0">
-            </thead>
             <tbody>
             <tr ng-repeat="project in myProjects.Projects">
-                <td class="grayBorder"><a class="increased" href="#/projects/{{project.Id}}">{{project.Name}}</a></td>
+                <td class="bottom-border grayBorder"><a class="increased" href="#/projects/{{project.Id}}">{{project.Name}}</a></td>
             </tr>
             </tbody>
         </table>
@@ -81,26 +80,26 @@
         </div>
         <uib-pagination total-items="myProjects.TotalCount" ng-model="projectParams.pageNumber"
                         items-per-page="projectParams.pageSize" ng-change="reloadProjects()"
-                        max-size="5" boundary-links="true" template-url="views/pagination/pagination.html">
+                        max-size="5" boundary-links="true" template-url="templates/pagination/pagination.html">
         </uib-pagination>
     </section>
     <section class="gray col-md-6 col-md-offset-1">
-        <h2 class="title">My Issues:</h2>
-        <table class="table table-condensed table-striped" ng-if="!issuesLoading" ng-if="myIssues.Issues.length > 0">
+        <h2 class="whiteText title">My Issues:</h2>
+        <table class="table table-condensed table-striped" ng-if="!issuesLoading && myIssues.Issues.length > 0">
             <thead>
             <tr>
-                <th class="whiteBorder increased col-md-3">Title</th>
-                <th class="whiteBorder increased col-md-3">Description</th>
-                <th class="whiteBorder increased col-md-3">Project</th>
-                <th class="whiteBorder increased col-md-3">Due Date</th>
+                <th class="whiteText increased col-md-3">Title</th>
+                <th class="whiteText increased col-md-3">Description</th>
+                <th class="whiteText increased col-md-3">Project</th>
+                <th class="whiteText increased col-md-3">Due Date</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="issue in myIssues.Issues">
-                <td class="whiteBorder"><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
-                <td class="whiteBorder">{{issue.Description}}</td>
-                <td class="whiteBorder"><a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a></td>
-                <td class="whiteBorder">{{issue.DueDate}}</td>
+                <td><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
+                <td>{{issue.Description}}</td>
+                <td><a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a></td>
+                <td>{{issue.DueDate}}</td>
             </tr>
             </tbody>
         </table>
@@ -110,7 +109,7 @@
         </div>
         <uib-pagination total-items="myIssues.TotalCount" ng-model="issuesParams.pageNumber"
                         items-per-page="issuesParams.pageSize" ng-change="reloadIssues()"
-                        max-size="5" boundary-links="true" template-url="views/pagination/pagination.html">
+                        max-size="5" boundary-links="true" template-url="templates/pagination/pagination.html">
         </uib-pagination>
     </section>
 

@@ -7,11 +7,14 @@ angular.module('issueTracker.directives', []);
 
 angular.module('issueTracker', [
     'ngRoute',
-    'issueTracker.controllers',
-    'issueTracker.services',
-    'issueTracker.filters',
-    'issueTracker.directives',
-    'ui.bootstrap.pagination'
+        'issueTracker.controllers',
+        'issueTracker.services',
+        'issueTracker.filters',
+        'issueTracker.directives',
+        'ui.bootstrap.pagination',
+        'ui.bootstrap.modal',
+        'ui.bootstrap.tpls',
+        'ui.bootstrap.datepickerPopup'
 ])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/'});
@@ -21,7 +24,9 @@ angular.module('issueTracker', [
     .run(['$rootScope','$location','$route','identityService',
         function ($rootScope,$location,$route,identityService) {
             $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-                $rootScope.title = current.$$route.title;
+                if(current.$$route){
+                    $rootScope.title = current.$$route.title;
+                }
             });
             $rootScope.$on('$locationChangeStart',function(event){
                 if($location.path() != "/" && !identityService.isLogged()){

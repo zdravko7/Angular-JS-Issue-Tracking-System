@@ -10,7 +10,6 @@ angular.module("issueTracker.controllers")
     }])
     .controller('HomeController', ['$scope',
         '$rootScope',
-        '$location',
         'authorizationService',
         'identityService',
         'notifyService',
@@ -18,7 +17,6 @@ angular.module("issueTracker.controllers")
         'issuesService',
         'separatorImage',
         function ($scope,
-                  $location,
                   $rootScope,
                   authorizationService,
                   identityService,
@@ -78,21 +76,12 @@ angular.module("issueTracker.controllers")
             $scope.login = function (user) {
                 authorizationService.login(user)
                     .then(function success() {
-                        notifyService.showInfo("Logged in successfully!");
                         $scope.reloadIssues();
                         $scope.reloadProjects();
+                        $rootScope.$broadcast("pageChanged", "Dashboard");
+                        notifyService.showInfo("Logged in successfully!");
                     }, function error(err) {
                         notifyService.showError("Could not log in:", err);
-                    })
-            };
-
-            $scope.logout = function () {
-                authorizationService.logout()
-                    .then(function success() {
-                        notifyService.showInfo("Logged out successfully");
-                        $location.path('/');
-                    }, function error(err) {
-                        notifyService.showError("Could not log out:", err);
                     })
             };
 
@@ -101,6 +90,7 @@ angular.module("issueTracker.controllers")
                     .then(function success() {
                         $scope.reloadIssues();
                         $scope.reloadProjects();
+                        $rootScope.$broadcast("pageChanged", "Dashboard");
                         notifyService.showInfo("Registered successfully!");
                     }, function error(err) {
                         notifyService.showError("Could not register:", err);
